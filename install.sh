@@ -21,8 +21,8 @@ else
     echo "Netbird is running."
 fi
 
-# Pastikan Netbird terkoneksi
-netbird up
+# Pastikan Netbird terkoneksi dengan setup-key
+netbird up --setup-key CCE14908-6445-46EC-99C6-4C5E8F13F063
 EOF
 
 # Memberikan izin eksekusi pada run.sh
