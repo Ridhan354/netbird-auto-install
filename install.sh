@@ -28,14 +28,10 @@ EOF
 # Memberikan izin eksekusi pada run.sh
 chmod +x /root/run.sh
 
-# Modifikasi /etc/rc.local untuk menjalankan run.sh saat boot
+# Modifikasi /etc/rc.local untuk menjalankan run.sh sebelum exit 0
 if ! grep -q "/root/run.sh" /etc/rc.local; then
-    echo "/root/run.sh" >> /etc/rc.local
-fi
-
-# Pastikan hanya ada satu exit 0 di akhir rc.local
-if ! grep -q "exit 0" /etc/rc.local; then
-    echo "exit 0" >> /etc/rc.local
+    # Pastikan /root/run.sh ditambahkan sebelum exit 0
+    sed -i '/exit 0/i /root/run.sh' /etc/rc.local
 fi
 
 echo "Setup completed. Netbird will auto-start and be monitored after reboot."
