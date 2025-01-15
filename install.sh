@@ -28,9 +28,13 @@ EOF
 # Memberikan izin eksekusi pada run.sh
 chmod +x /root/run.sh
 
-# Menambahkan run.sh ke /etc/rc.local untuk dijalankan otomatis saat boot
+# Modifikasi /etc/rc.local untuk menjalankan run.sh saat boot
 if ! grep -q "/root/run.sh" /etc/rc.local; then
     echo "/root/run.sh" >> /etc/rc.local
+fi
+
+# Pastikan hanya ada satu exit 0 di akhir rc.local
+if ! grep -q "exit 0" /etc/rc.local; then
     echo "exit 0" >> /etc/rc.local
 fi
 
